@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+</head>
+<body>
+<progress id="progress" max="100"></progress>
+<input type="file" id="file">
+<input type="text" id="downloadUrl">
+</body>
+<script type="module">
+    import {Firebase} from "./firebase.js";
+
+    const firebase = new Firebase();
+
+    const input = $('#file')
+
+    input.change(function () {
+        let data = input.prop('files')
+        let file = data[0];
+
+        firebase.setProgress('#progress');
+        firebase.setDownloadUrl('#downloadUrl')
+        firebase.setLocation('/images/' + file.name);
+
+        firebase.upload(file);
+
+    });
+
+
+</script>
+</html>
