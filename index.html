@@ -22,16 +22,19 @@
 
     const firebase = new Firebase();
 
+    // Set information
+    firebase.setProgress('#progress');
+    firebase.setDownloadUrl('#downloadUrl')
+
     const input = $('#file')
 
+    // Upload file when input
     input.change(function () {
+        // Get file
         let data = input.prop('files')
         let file = data[0];
 
-        firebase.setProgress('#progress');
-        firebase.setDownloadUrl('#downloadUrl')
         firebase.setLocation('/images/' + file.name);
-
         firebase.upload(file);
 
     });
